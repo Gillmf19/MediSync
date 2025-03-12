@@ -1,0 +1,54 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.sln.docstates
+*.cache
+*.pdb
+*.log
+*.tlog
+*.VC.db
+*.VC.VC.opendb
+
+# Archivos de configuración y entorno
+*.rsuser
+*.sln.ide
+*.sln.docstates
+*.vscode/
+
+# Binarios y directorios de compilación
+bin/
+obj/
+out/
+*.dll
+*.exe
+
+# Paquetes de NuGet
+*.nupkg
+*.snupkg
+packages/
+!packages/repositories.config
+
+# Archivos de publicación
+publish/
+*.Publish.xml
+
+# Archivos temporales y de depuración
+*.bak
+*.tmp
+*.log
+*.dmp
+*.err
+*.csproj.user
+*.vbproj.user
+
+# Configuración específica del entorno
+appsettings.Development.json
+secrets.json
+
+# Rider IDE (si lo usas)
+.idea/
+*.sln.iml
+
+# Archivos de lock de VS Code
+*.code-workspace
