@@ -1,0 +1,53 @@
+﻿<Window x:Class="MediSync.Views.AgregarUsuarioView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Agregar Usuario" Height="549" Width="506" WindowStartupLocation="CenterScreen"
+        Background="White">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Text="Agregar Usuario" FontSize="18" FontWeight="Bold" 
+                   HorizontalAlignment="Center" Grid.Row="0" Margin="0,0,0,15"/>
+
+        <!-- Nombre Completo -->
+        <TextBlock Text="Nombre Completo:" FontWeight="Bold" Grid.Row="1" Margin="0,5"/>
+        <TextBox x:Name="txtNombre" Grid.Row="2" Height="30" Padding="5"/>
+
+        <!-- Correo Electrónico -->
+        <TextBlock Text="Correo Electrónico:" FontWeight="Bold" Grid.Row="3" Margin="0,5"/>
+        <TextBox x:Name="txtCorreo" Grid.Row="4" Height="30" Padding="5"/>
+
+        <!-- Contraseña -->
+        <TextBlock Text="Contraseña:" FontWeight="Bold" Grid.Row="5" Margin="0,5"/>
+        <PasswordBox x:Name="txtContrasena" Grid.Row="6" Height="30" Padding="5"/>
+
+        <!-- Confirmar Contraseña -->
+        <TextBlock Text="Confirmar Contraseña:" FontWeight="Bold" Grid.Row="7" Margin="0,5"/>
+        <PasswordBox x:Name="txtConfirmarContrasena" Grid.Row="8" Height="30" Padding="5"/>
+
+        <!-- Rol del Usuario -->
+        <TextBlock Text="Rol del Usuario:" FontWeight="Bold" Grid.Row="9" Margin="0,5"/>
+        <ComboBox x:Name="cbRol" Grid.Row="10" Height="30" Padding="5" Width="466" HorizontalAlignment="Center" Margin="0,0,0,45"/>
+
+        <!-- Botones -->
+        <StackPanel Orientation="Horizontal" Grid.Row="10" HorizontalAlignment="Center" Margin="0,97,0,-57">
+            <Button Content="Guardar Usuario" Width="150" Height="35" Click="BtnGuardar_Click"
+                    Background= "#1A5276" Foreground="White" FontWeight="Bold"/>
+            <Button Content="Cancelar" Width="120" Height="35" Click="BtnCancelar_Click"
+                    Background="Gray" Foreground="White" FontWeight="Bold" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

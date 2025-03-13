@@ -1,0 +1,38 @@
+﻿<Window x:Class="MediSync.Views.RegistrarMovimientoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Registrar Movimiento" Height="400" Width="400" WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Registrar Movimiento" FontSize="18" FontWeight="Bold" 
+                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+        <TextBlock Text="Producto:" Grid.Row="1" Margin="5"/>
+        <ComboBox x:Name="cbProducto" Grid.Row="1" Margin="5"/>
+
+        <TextBlock Text="Tipo de Movimiento:" Grid.Row="2" Margin="5"/>
+        <ComboBox x:Name="cbTipoMovimiento" Grid.Row="2" Margin="5">
+            <ComboBoxItem Content="Entrada"/>
+            <ComboBoxItem Content="Salida"/>
+        </ComboBox>
+
+        <TextBlock Text="Cantidad:" Grid.Row="3" Margin="5"/>
+        <TextBox x:Name="txtCantidad" Grid.Row="3" Margin="5"/>
+
+        <TextBlock Text="Fecha:" Grid.Row="4" Margin="5"/>
+        <DatePicker x:Name="dpFecha" Grid.Row="4" Margin="5"/>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+            <Button Content="Guardar" Width="100" Margin="5" Click="BtnGuardar_Click"/>
+            <Button Content="Cancelar" Width="100" Margin="5" Click="BtnCancelar_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

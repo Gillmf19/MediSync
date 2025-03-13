@@ -15,56 +15,77 @@ using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 using MediSync.Controllers;
+using MediSync.Views; // Asegurar que pueda acceder a otras vistas
 
 namespace MediSync.Views
 {
     public partial class AdminDashboardView : UserControl
     {
-        public SeriesCollection StockProductos { get; set; }
-        public List<string> NombresProductos { get; set; }
-
         public AdminDashboardView()
         {
             InitializeComponent();
-            CargarDatosInventario();
-
-            // Establecer DataContext para la gráfica
-            DataContext = this;
         }
 
         /// <summary>
-        /// Método para cargar datos simulados de productos médicos en la gráfica.
+        /// Método para cambiar entre vistas y ocultar el Dashboard cuando se necesite.
         /// </summary>
-        private void CargarDatosInventario()
+        private void MostrarVista(UserControl vista)
         {
-            // Simulación de productos médicos con su stock disponible
-            var productos = new Dictionary<string, int>
+            if (DashboardContent != null && MainFrame != null)
             {
-                { "Guantes Estériles", 50 },
-                { "Jeringas 5ml", 30 },
-                { "Batas Quirúrgicas", 20 },
-                { "Mascarillas N95", 60 },
-                { "Solución Salina", 40 }
-            };
-
-            // Asignar datos a la gráfica
-            StockProductos = new SeriesCollection
-            {
-                new ColumnSeries
-                {
-                    Title = "Stock Disponible",
-                    Values = new ChartValues<int>(productos.Values)
-                }
-            };
-
-            // Nombres de los productos en el eje X
-            NombresProductos = new List<string>(productos.Keys);
+                DashboardContent.Visibility = Visibility.Collapsed; // Oculta el Dashboard
+                MainFrame.Visibility = Visibility.Visible; // Muestra el Frame
+                MainFrame.Content = vista; // Carga la nueva vista
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Carga la vista de Gestión de Productos.
+        /// </summary>
+        private void BtnProductos_Click(object sender, RoutedEventArgs e)
         {
-            NavigationController.NavigateTo("GestionProductosView");
+            MostrarVista(new GestionProductosView());
+        }
+
+        /// <summary>
+        /// Carga la vista de Gestión de Categorías.
+        /// </summary>
+        private void BtnCategorias_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarVista(new GestionCategoriasView());
+        }
+
+        /// <summary>
+        /// Regresa al Dashboard Principal.
+        /// </summary>
+        private void BtnDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame != null && DashboardContent != null)
+            {
+                MainFrame.Content = null; // Limpia el Frame
+                MainFrame.Visibility = Visibility.Collapsed; // Oculta el Frame
+                DashboardContent.Visibility = Visibility.Visible; // Muestra el Dashboard
+            }
+        }
+
+        private void BtnProveedores_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarVista(new GestionProveedoresView());
+        }
+
+        private void BtnMovimientos_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarVista(new GestionMovimientosView());
+        }
+
+        private void BtnReportes_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarVista(new GestionReportesView());
+        }
+
+        private void BtnUsuariosRoles_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarVista(new GestionUsuariosRolesView());
         }
     }
 }
-

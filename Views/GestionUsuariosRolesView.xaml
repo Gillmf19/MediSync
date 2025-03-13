@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="MediSync.Views.GestionUsuariosRolesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="Auto" Width="Auto">
+    <Grid Background="White" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Text="Gestión de Usuarios y Roles"
+                   FontSize="18" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="10"/>
+
+        <!-- Barra de Búsqueda y Botón Agregar Usuario -->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Campo de búsqueda -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Grid.Column="0" Height="35" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="🔍" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="txtBuscarUsuario" Grid.Column="1" VerticalAlignment="Center"
+                             BorderThickness="0" TextChanged="TxtBuscarUsuario_TextChanged"/>
+                </Grid>
+            </Border>
+
+            <!-- Botón para Agregar Usuario -->
+            <Button Content="➕ Agregar Usuario" Width="180" Height="35"
+                    Grid.Column="1" HorizontalAlignment="Left"
+                    Background="#1A5276" Foreground="White" FontWeight="Bold"
+                    Click="BtnAgregarUsuario_Click" Margin="20,0,0,0" VerticalAlignment="Top"/>
+        </Grid>
+
+        <!-- Tabla de Usuarios -->
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="10">
+            <StackPanel>
+                <TextBlock Text="Lista de Usuarios" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                <DataGrid x:Name="dgUsuarios" AutoGenerateColumns="False"
+                          Margin="10" Height="300" SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>
+                        <DataGridTextColumn Header="Correo" Binding="{Binding Correo}" Width="250"/>
+                        <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" Width="150"/>
+                        <DataGridTemplateColumn Header="Acciones" Width="250">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Content="✏️ Editar" Width="80" Margin="5" Click="BtnEditarUsuario_Click"/>
+                                        <Button Content="🗑 Eliminar" Width="80" Margin="5" Click="BtnEliminarUsuario_Click"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</UserControl>

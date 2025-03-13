@@ -40,6 +40,13 @@ namespace MediSync.Controllers
                 case "GestionProductosView":
                     _mainFrame.Navigate(new GestionProductosView());
                     break;
+                case "GestionCategoriasView":
+                    _mainFrame.Navigate(new GestionCategoriasView());
+                    break;
+                case "GestionProductosSupervisorView":
+                    _mainFrame.Navigate(new GestionProductosSupervisorView());
+                    break;
+
                 default:
                     throw new Exception("Vista no encontrada.");
             }

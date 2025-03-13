@@ -11,60 +11,56 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using MediSync.Models; // Asegurar que la referencia al modelo está incluida
+using MediSync.Models;
 
 namespace MediSync.Views
 {
-    public partial class AgregarProductoView : Window
+    public partial class AgregarUsuarioView : Window
     {
-        public Producto NuevoProducto { get; private set; }
+        public Usuario UsuarioCreado { get; private set; }
 
-        public AgregarProductoView()
+        public AgregarUsuarioView(List<string> roles)
         {
             InitializeComponent();
+            cbRol.ItemsSource = roles; // Cargar roles disponibles
         }
 
         /// <summary>
-        /// Evento para guardar un nuevo producto.
+        /// Guardar el nuevo usuario con validaciones.
         /// </summary>
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            // Validar que todos los campos estén llenos
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
-                string.IsNullOrWhiteSpace(txtCantidad.Text) ||
-                cbCategoria.SelectedItem == null ||
-                string.IsNullOrWhiteSpace(txtProveedor.Text))
+                string.IsNullOrWhiteSpace(txtCorreo.Text) ||
+                string.IsNullOrWhiteSpace(txtContrasena.Password) ||
+                string.IsNullOrWhiteSpace(txtConfirmarContrasena.Password) ||
+                cbRol.SelectedItem == null)
             {
                 MessageBox.Show("Todos los campos son obligatorios.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Validar que el stock sea un número válido
-            if (!int.TryParse(txtCantidad.Text, out int stock) || stock < 0)
+            if (txtContrasena.Password != txtConfirmarContrasena.Password)
             {
-                MessageBox.Show("El stock debe ser un número válido y mayor o igual a 0.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Crear el nuevo producto
-            NuevoProducto = new Producto
+            UsuarioCreado = new Usuario
             {
                 Id = new Random().Next(100, 999), // ID Simulado
                 Nombre = txtNombre.Text,
-                Stock = stock,
-                Categoria = ((ComboBoxItem)cbCategoria.SelectedItem).Content.ToString(),
-                Proveedor = txtProveedor.Text
+                Correo = txtCorreo.Text,
+                Contrasena = txtContrasena.Password, // En producción, deberías encriptarla
+                Rol = cbRol.SelectedItem.ToString()
             };
 
-            this.DialogResult = true; // Indicar que la operación fue exitosa
+            this.DialogResult = true;
             this.Close();
         }
 
         /// <summary>
-        /// Evento para cerrar la ventana sin guardar.
+        /// Cancelar la operación.
         /// </summary>
         private void BtnCancelar_Click(object sender, RoutedEventArgs e)
         {

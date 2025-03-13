@@ -16,19 +16,18 @@ using MediSync.Models;
 
 namespace MediSync.Views
 {
-    public partial class GestionProductosView : UserControl
+    public partial class GestionProductosSupervisorView : UserControl
     {
-        // Lista de productos simulada para la demostración
         private List<Producto> productos;
 
-        public GestionProductosView()
+        public GestionProductosSupervisorView()
         {
             InitializeComponent();
             CargarProductos();
         }
 
         /// <summary>
-        /// Método para cargar la lista de productos simulada.
+        /// Cargar lista de productos.
         /// </summary>
         private void CargarProductos()
         {
@@ -41,12 +40,11 @@ namespace MediSync.Views
                 new Producto { Id = 5, Nombre = "Solución Salina", Categoria = "Medicamentos", Stock = 40 }
             };
 
-            // Enlazar la lista al DataGrid
             dgProductos.ItemsSource = productos;
         }
 
         /// <summary>
-        /// Filtra los productos según el texto ingresado en la barra de búsqueda.
+        /// Filtra los productos según la búsqueda.
         /// </summary>
         private void TxtBuscarProducto_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -57,60 +55,21 @@ namespace MediSync.Views
         }
 
         /// <summary>
-        /// Método para manejar el evento de clic en el botón "Agregar Producto".
+        /// Evento de clic en el botón "Agregar Producto".
         /// </summary>
         private void BtnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
-            // Abrir la ventana para agregar un nuevo producto
-            AgregarProductoView agregarProductoWindow = new AgregarProductoView();
-            bool? resultado = agregarProductoWindow.ShowDialog();
-
-            // Si el usuario guardó un nuevo producto, se agrega a la lista
-            if (resultado == true)
-            {
-                Producto nuevoProducto = agregarProductoWindow.NuevoProducto;
-
-                // Agregar el nuevo producto a la lista
-                productos.Add(nuevoProducto);
-
-                // Refrescar el DataGrid
-                dgProductos.ItemsSource = null;
-                dgProductos.ItemsSource = productos;
-
-                MessageBox.Show("Producto agregado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            MessageBox.Show("Funcionalidad de agregar producto en desarrollo.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
-        /// Método para manejar el evento de clic en el botón "Editar Producto".
+        /// Evento de clic en el botón "Editar Producto".
         /// </summary>
         private void BtnEditarProducto_Click(object sender, RoutedEventArgs e)
         {
-            // Verificar si se ha seleccionado un producto en la lista
             if (dgProductos.SelectedItem is Producto productoSeleccionado)
             {
-                // Abrir la ventana de edición y pasar el producto seleccionado
-                EditarProductoView editarProductoWindow = new EditarProductoView(productoSeleccionado);
-                bool? resultado = editarProductoWindow.ShowDialog();
-
-                // Si el usuario guardó los cambios, actualizar la lista
-                if (resultado == true)
-                {
-                    Producto productoEditado = editarProductoWindow.ProductoEditado;
-
-                    // Buscar el índice del producto original en la lista
-                    int index = productos.FindIndex(p => p.Id == productoSeleccionado.Id);
-                    if (index >= 0)
-                    {
-                        productos[index] = productoEditado;
-                    }
-
-                    // Refrescar el DataGrid
-                    dgProductos.ItemsSource = null;
-                    dgProductos.ItemsSource = productos;
-
-                    MessageBox.Show("Producto actualizado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                MessageBox.Show($"Editar producto: {productoSeleccionado.Nombre}", "Editar Producto", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
@@ -119,7 +78,7 @@ namespace MediSync.Views
         }
 
         /// <summary>
-        /// Método para manejar el evento de clic en el botón "Eliminar Producto".
+        /// Evento de clic en el botón "Eliminar Producto".
         /// </summary>
         private void BtnEliminarProducto_Click(object sender, RoutedEventArgs e)
         {
@@ -141,18 +100,6 @@ namespace MediSync.Views
                 MessageBox.Show("Seleccione un producto para eliminar.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-    }
-
-    /// <summary>
-    /// Modelo de datos para un producto.
-    /// </summary>
-    public class Producto
-    {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Categoria { get; set; }
-        public int Stock { get; set; }
-        public string Proveedor { get; internal set; }
     }
 }
 
