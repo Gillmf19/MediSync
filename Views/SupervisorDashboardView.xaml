@@ -11,8 +11,8 @@
                 <TextBlock Text="Menú" FontSize="16" FontWeight="Bold" Foreground="White" Margin="10"/>
                 <Button Content="Dashboard" Background="Transparent" Foreground="White" Margin="5"/>
                 <Button Content="Productos" Background="Transparent" Foreground="White" Margin="5" Click="BtnProductos_Click"/>
-                <Button Content="Movimientos" Background="Transparent" Foreground="White" Margin="5"/>
-                <Button Content="Reportes" Background="Transparent" Foreground="White" Margin="5"/>
+                <Button Content="Movimientos" Background="Transparent" Foreground="White" Margin="5" Click="BtnMovimientos_Click" />
+                <Button Content="Reportes" Background="Transparent" Foreground="White" Margin="5" Click="BtnReportes_Click"/>
             </StackPanel>
         </Grid>
 

@@ -98,6 +98,18 @@ namespace MediSync.Views
             NavigationController.NavigateTo("GestionProductosSupervisorView");
         }
 
+        private void BtnMovimientos_Click(object sender, RoutedEventArgs e)
+        {
+            // Navegar a la vista de Gestión de Movimientos para el Supervisor
+            NavigationController.NavigateTo("GestionMovimientosSupervisor");
+        }
+
+        private void BtnReportes_Click(object sender, RoutedEventArgs e)
+        {
+            // Navega a la vista de Gestión de Reportes del Supervisor
+            NavigationController.NavigateTo("GestionReportesSupervisorView");
+        }
+
 
     }
 

@@ -59,7 +59,18 @@ namespace MediSync.Views
         /// </summary>
         private void BtnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Funcionalidad de agregar producto en desarrollo.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+            AgregarProductoSupervisorView ventanaAgregar = new AgregarProductoSupervisorView();
+            if (ventanaAgregar.ShowDialog() == true)
+            {
+                Producto nuevoProducto = ventanaAgregar.ProductoNuevo;
+                if (nuevoProducto != null)
+                {
+                    productos.Add(nuevoProducto);
+                    dgProductos.ItemsSource = null;
+                    dgProductos.ItemsSource = productos;
+                    MessageBox.Show("Producto agregado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
         }
 
         /// <summary>
@@ -69,13 +80,33 @@ namespace MediSync.Views
         {
             if (dgProductos.SelectedItem is Producto productoSeleccionado)
             {
-                MessageBox.Show($"Editar producto: {productoSeleccionado.Nombre}", "Editar Producto", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Abrir la ventana de edición y pasar el producto seleccionado
+                EditarProductoSupervisor ventanaEditar = new EditarProductoSupervisor(productoSeleccionado);
+
+                if (ventanaEditar.ShowDialog() == true)
+                {
+                    Producto productoEditado = ventanaEditar.ProductoEditado;
+
+                    if (productoEditado != null)
+                    {
+                        // Buscar el producto en la lista y actualizarlo
+                        int index = productos.FindIndex(p => p.Id == productoSeleccionado.Id);
+                        if (index >= 0)
+                        {
+                            productos[index] = productoEditado;
+                            dgProductos.ItemsSource = null; // Resetear DataGrid
+                            dgProductos.ItemsSource = productos; // Recargar datos
+                        }
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("Seleccione un producto para editar.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+
 
         /// <summary>
         /// Evento de clic en el botón "Eliminar Producto".

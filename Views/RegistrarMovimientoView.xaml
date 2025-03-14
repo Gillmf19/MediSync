@@ -10,29 +10,36 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- Título -->
         <TextBlock Text="Registrar Movimiento" FontSize="18" FontWeight="Bold" 
-                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                   HorizontalAlignment="Center" Grid.Row="0" Margin="0,0,0,15"/>
 
+        <!-- Producto -->
         <TextBlock Text="Producto:" Grid.Row="1" Margin="5"/>
-        <ComboBox x:Name="cbProducto" Grid.Row="1" Margin="5"/>
+        <ComboBox x:Name="cbProducto" Grid.Row="1" Margin="5" Width="200" HorizontalAlignment="Center"/>
 
+        <!-- Tipo de Movimiento -->
         <TextBlock Text="Tipo de Movimiento:" Grid.Row="2" Margin="5"/>
-        <ComboBox x:Name="cbTipoMovimiento" Grid.Row="2" Margin="5">
+        <ComboBox x:Name="cbTipoMovimiento" Grid.Row="2" Margin="5" Width="200" HorizontalAlignment="Center">
             <ComboBoxItem Content="Entrada"/>
             <ComboBoxItem Content="Salida"/>
         </ComboBox>
 
+        <!-- Cantidad -->
         <TextBlock Text="Cantidad:" Grid.Row="3" Margin="5"/>
-        <TextBox x:Name="txtCantidad" Grid.Row="3" Margin="5"/>
+        <TextBox x:Name="txtCantidad" Grid.Row="3" Margin="5" Width="200" HorizontalAlignment="Center"/>
 
+        <!-- Fecha -->
         <TextBlock Text="Fecha:" Grid.Row="4" Margin="5"/>
-        <DatePicker x:Name="dpFecha" Grid.Row="4" Margin="5"/>
+        <DatePicker x:Name="dpFecha" Grid.Row="4" Margin="5" Width="200" HorizontalAlignment="Center"/>
 
-        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-            <Button Content="Guardar" Width="100" Margin="5" Click="BtnGuardar_Click"/>
-            <Button Content="Cancelar" Width="100" Margin="5" Click="BtnCancelar_Click"/>
+        <!-- Botones -->
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Guardar" Width="100" Margin="5" Click="BtnGuardar_Click" Background="#1A5276" Foreground="White"/>
+            <Button Content="Cancelar" Width="100" Margin="5" Click="BtnCancelar_Click" Background="Gray" Foreground="White"/>
         </StackPanel>
     </Grid>
 </Window>

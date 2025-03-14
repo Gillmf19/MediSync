@@ -4,7 +4,8 @@
         Title="MediSync" Height="500" Width="800">
     <Grid>
         <!-- Contenedor de navegación -->
-        <Frame x:Name="MainFrame"/>
+        <Frame x:Name="MainFrame" Source="DashboardView.xaml" NavigationUIVisibility="Hidden"/>
+
     </Grid>
 </Window>
 
