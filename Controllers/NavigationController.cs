@@ -11,7 +11,7 @@ namespace MediSync.Controllers
 {
     public static class NavigationController
     {
-        private static Frame _mainFrame;
+        public static Frame _mainFrame;
 
         public static void SetMainFrame(Frame frame)
         {

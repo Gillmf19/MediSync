@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MediSync.Controllers;
+using Microsoft.Data.SqlClient;
 
 namespace MediSync.Views
 {
@@ -27,18 +29,44 @@ namespace MediSync.Views
         {
             string usuario = txtUsuario.Text;
             string contrasena = txtContrasena.Password;
-
             string rol = LoginController.AutenticarUsuario(usuario, contrasena);
 
-            if (rol != null)
+            string conectionString = ConfigurationManager.ConnectionStrings["MediSyncConection"].ConnectionString;
+
+            try
             {
-                MessageBox.Show($"Bienvenido {usuario} - Rol: {rol}", "Acceso Permitido", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationController.NavigateTo(rol); // Redirigir según el rol
+                using (SqlConnection connection = new SqlConnection(conectionString))
+                {
+                    connection.Open();
+                    string query = "select nombre_usuario, contraseña from Usuarios where nombre_usuario = @usuario and contraseña = @contraseña";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@usuario", usuario);
+                        command.Parameters.AddWithValue("@contraseña", contrasena);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Content = new AdminDashboardView();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+
+                        }
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Credenciales incorrectas. Inténtalo de nuevo.", "Error de Autenticación", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error al conectar con la base de datos: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
+
+
+       
     }
 }
